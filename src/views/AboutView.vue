@@ -1,4 +1,8 @@
 <script setup>
+import Footer from "../components/Footer.vue"
+import TitleText from "../components/TitleText.vue"
+import github from "../assets/github.svg";
+
 let h3 = " text-3xl mb-2 font-medium"
 let p = "mb-4"
 let link = "text-blue-500 hover:text-blue-700 hover:underline"
@@ -6,13 +10,13 @@ let link = "text-blue-500 hover:text-blue-700 hover:underline"
 
 <template>
   <div class="container mx-auto font-sans px-8 lg:max-w-6xl">
-      <!-- <TitleText /> -->
+      <TitleText />
       <h2 class="my-4 text-center text-4xl">About this app</h2>
       <section class="text-center py-0 px-7 mb-5">
         <p :class="p">
           This app is my attempt to stay productive during quarantine. This fun
           project works using the
-          <a class={{link}} href="https://www.superheroapi.com/">
+          <a :class="link" href="https://www.superheroapi.com/">
             Superhero-API
           </a>
         </p>
@@ -20,7 +24,7 @@ let link = "text-blue-500 hover:text-blue-700 hover:underline"
           class="py-2 px-4 bg-gray-500 text-white leading-6 inline-block text-center align-middle rounded-md hover:bg-gray-600"
           href="https://github.com/halosatrio/ts-tanding-hero"
         >
-          <!-- <img src={github} alt="github icon" width={20} class="inline" /> -->
+          <img :src="github" alt="github icon" width="20" class="inline" />
           <span class="ml-2">Visit Repo</span>
         </a>
       </section>
@@ -61,7 +65,7 @@ let link = "text-blue-500 hover:text-blue-700 hover:underline"
           incomplete powerstats may fills with "null" for all the stats, that's
           why it could produce "inacurate" result.
         </p>
-        <h3 class="text-3xl mb-2 font-medium mt-4">The Assets This App Used</h3>
+        <h3 class="mt-4" :class="h3">The Assets This App Used</h3>
         <ul class="list-disc pl-10">
           <li>
             The Swords icon made by
@@ -103,7 +107,7 @@ let link = "text-blue-500 hover:text-blue-700 hover:underline"
           </li>
         </ul>
       </div>
-      <!-- <Footer isTanding={{false}} /> -->
+      <Footer :isTanding="false" />
     </div>
 </template>
 
