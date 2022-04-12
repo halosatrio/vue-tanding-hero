@@ -3,7 +3,8 @@ import batman from "../assets/batman.png";
 import ironman from "../assets/ironman.png";
 import swords from "../assets/swords.png";
 
-defineProps(["className", "handleStart"]);
+defineProps(["className"]);
+const emit = defineEmits(["handleStart"]);
 </script>
 
 <template>
@@ -22,7 +23,7 @@ defineProps(["className", "handleStart"]);
     <div class="text-center my-4">
       <button
         class="py-2 px-12 bg-red-600 text-white border border-red-500 leading-8 inline-block text-xl text-center align-middle rounded-md hover:bg-red-700 duration-100"
-        @click="handleStart"
+        @click="emit('handleStart')"
       >
         S T A R T
       </button>

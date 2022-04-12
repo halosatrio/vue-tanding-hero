@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useState } from "../utils/useState";
 import { randomNumber } from "../utils/generateRandom";
 import { fetchHero } from "../utils/fetchHero";
@@ -78,24 +78,29 @@ const handleHeroRematch = (
 };
 
 // display/hidden logic using tailwind css
-const showOpening = opening ? "block" : "hidden";
-const showVersus = opening ? "hidden" : "block";
+const showOpening = ref("block");
+const showVersus = ref("hidden");
 
 const heroUser = [heroUser1, heroUser2, heroUser3, heroUser4];
+
+watch(opening, () => (showOpening.value = opening.value ? "block" : "hidden"));
+watch(opening, () => (showVersus.value = opening.value ? "hidden" : "block"));
+// watch(showOpening, () => console.log("showOpening", showOpening));
+// console.log("showOpening", showOpening);
 </script>
 
 <template>
   <div className="container mx-auto tanding max-w-6xl">
     <TitleText />
-    <Opening :className="showOpening" :handleStart="handleStart" />
-    <!-- <Versus
+    <Opening :className="showOpening" @click="handleStart" />
+    <Versus
       :className="showVersus"
       :heroLawan="heroLawan"
       :heroUser="heroUser"
       :handleResetHero="handleResetHero"
       :handleHeroRematch="handleHeroRematch"
       :loading="loading"
-    /> -->
+    />
     <Footer :isTanding="true" />
   </div>
 </template>

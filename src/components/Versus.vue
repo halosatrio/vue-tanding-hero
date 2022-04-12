@@ -80,20 +80,11 @@ const handleRematch = async () => {
 
 <template>
   <div class="versus" :class="className">
-    <!-- <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={handleCloseModal}
-      overlayClassName="ReactModal__Overlay"
-      className="ReactModal__Content"
-    >
-      <h2 className="mb-3">{hasilTanding}</h2>
-      <button
-        className="py-1 px-2 bg-gray-500 text-white leading-6 text-center rounded hover:bg-gray-600"
-        onClick={handleCloseModal}
-      >
-        close
-      </button>
-    </Modal> -->
+    <Modal
+      :isOpen="modalIsOpen"
+      :hasilTanding="hasilTanding"
+      @click="handleCloseModal"
+    />
     <div className="flex flex-row justify-center my-6 items-center">
       <div className="basis-5/12 lg:basis-4/12 px-4">
         <TableHeroUser
@@ -101,8 +92,8 @@ const handleRematch = async () => {
           :heroUser2="heroUser2"
           :heroUser3="heroUser3"
           :heroUser4="heroUser4"
-          :handleClick="handleSelectHeroUser"
-          :showTableHeroUser="!showTable"
+          @handleClick="handleSelectHeroUser"
+          :showTableHeroUser="!showTable.value"
           :loading="loading"
         />
         <HeroUser
