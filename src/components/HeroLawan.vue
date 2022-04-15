@@ -1,16 +1,20 @@
 <script setup>
 import { useState } from "../utils/useState";
+import man from "../assets/man.png";
+import { watch } from "vue";
 
 // props
-defineProps(["heroLawan", "showHeroLawan", "powerLevelLawan"]);
+const {heroLawan, showHeroLawan, powerLevelLawan} = defineProps(["heroLawan", "showHeroLawan", "powerLevelLawan"]);
 
 // state
 const [showStats, setShowStats] = useState(false);
 
 // handlers
 const handleShowStats = () => {
-  setShowStats(!showStats);
+  setShowStats(!showStats.value);
 };
+
+watch(showStats, () => console.log(showStats.value))
 </script>
 
 <template>
@@ -20,13 +24,13 @@ const handleShowStats = () => {
       <img className="w-full" :src="heroLawan.image" :alt="heroLawan.name" />
       <h4>{{ heroLawan.name }}</h4>
       <button
-        className="py-2 px-4 bg-gray-500 text-white leading-6 text-center rounded hover:bg-gray-600 mt-4"
+        class="py-2 px-4 bg-gray-500 text-white leading-6 text-center rounded hover:bg-gray-600 mt-4"
         @click="handleShowStats"
       >
         show stats
       </button>
       <div
-        v-if="showStats.value"
+        v-show="showStats"
         className="border border-gray-500 rounded-lg py-3 px-0 text-left mt-2"
       >
         <ul className="list-disc pl-8">

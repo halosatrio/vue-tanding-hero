@@ -15,6 +15,7 @@ import {
 import TableHeroUser from "./TableHeroUser.vue";
 import HeroUser from "./HeroUser.vue";
 import HeroLawan from "./HeroLawan.vue";
+import { ref, watch } from "vue";
 
 // props
 const props = defineProps([
@@ -29,15 +30,15 @@ const props = defineProps([
 // LOGICSSSS
 // states
 const [showTable, setShowTable] = useState(true);
-const [selectedHero, setSelectedHero] = useState(null);
+const [selectedHero, setSelectedHero] = useState('');
 const [showHeroLawan, setShowHeroLawan] = useState(false);
 const [modalIsOpen, setModalIsOpen] = useState(false);
 
-const powerLevelUser = calculatePowerLevel(selectedHero.value);
-const powerLevelLawan = calculatePowerLevel(props.heroLawan);
+const powerLevelUser = ref(calculatePowerLevel(selectedHero.value));
+const powerLevelLawan = ref(calculatePowerLevel(props.heroLawan));
 
 const [heroUser1, heroUser2, heroUser3, heroUser4] = props.heroUser;
-const hasilTanding = bandingUserLawan(powerLevelUser, powerLevelLawan);
+const hasilTanding = bandingUserLawan(powerLevelUser.value, powerLevelLawan.value);
 
 // handlers
 const handleSelectHeroUser = (hero) => {
@@ -76,10 +77,12 @@ const handleRematch = async () => {
     ]);
   handleHeroRematch(heroLawan, heroUser1, heroUser2, heroUser3, heroUser4);
 };
+
+watch(showTable, () => console.log("showTable", showTable))
 </script>
 
 <template>
-  <div class="versus" :class="className">
+  <div class="versus" :class="props.className">
     <Modal
       :isOpen="modalIsOpen"
       :hasilTanding="hasilTanding"
@@ -93,13 +96,13 @@ const handleRematch = async () => {
           :heroUser3="heroUser3"
           :heroUser4="heroUser4"
           @handleClick="handleSelectHeroUser"
-          :showTableHeroUser="!showTable.value"
-          :loading="loading"
+          :showTableHeroUser="showTable.value"
+          :loading="props.loading"
         />
         <HeroUser
-          showHeroUser="showTable"
-          selectedHero="selectedHero"
-          powerLevelUser="powerLevelUser"
+          :showHeroUser="showTable.value"
+          :selectedHero="selectedHero.value"
+          :powerLevelUser="powerLevelUser.value"
         />
       </div>
       <div className="basis-2/12 sword">

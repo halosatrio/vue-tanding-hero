@@ -1,6 +1,4 @@
 <script setup>
-// const modal = document.querySelector(".modal");
-
 import { watch } from "vue";
 
 const { isOpen, hasilTanding } = defineProps(["isOpen", "hasilTanding"]);
@@ -13,7 +11,7 @@ watch(isOpen, (newOpen) => console.log(newOpen));
 
 <template>
   <div
-    v-if="isOpen"
+    v-if="isOpen.value"
     class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50"
   >
     <!-- modal -->

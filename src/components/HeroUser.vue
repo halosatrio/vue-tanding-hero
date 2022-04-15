@@ -1,21 +1,25 @@
 <script setup>
+import { watch } from "vue";
 import { useState } from "../utils/useState";
 
-defineProps(["showHeroUser", "selectedHero", "powerLevelUser"]);
+const {showHeroUser, selectedHero, powerLevelUser} = defineProps(["showHeroUser", "selectedHero", "powerLevelUser"]);
 
 // state
 const [showStats, setShowStats] = useState(false);
 
 // handlers
 const handleShowStats = () => {
-  setShowStats(!showStats);
+  setShowStats(!showStats.value);
 };
+
+console.log("showHeroUser", showHeroUser)
+watch(showHeroUser, () => console.log("showHeroUser", showHeroUser))
 </script>
 
 <template>
   <div class="hero-user text-center" :class="showHeroUser ? 'block' : 'hidden'">
     <h5 class="text-center mb-2">Your Character</h5>
-    <figure v-if="selectedHero">
+    <figure v-if="!!selectedHero">
       <img :src="selectedHero.image" :alt="selectedHero.name" />
       <h4>{{ selectedHero.name }}</h4>
       <button
@@ -25,7 +29,7 @@ const handleShowStats = () => {
         show stats
       </button>
       <div
-        v-if="showStats.value"
+        v-show="showStats"
         class="border border-gray-500 rounded-lg py-3 px-0 text-left mt-2"
       >
         <ul class="list-disc pl-8">

@@ -99,7 +99,7 @@ watch(opening, () => (showVersus.value = opening.value ? "hidden" : "block"));
       :heroUser="heroUser"
       :handleResetHero="handleResetHero"
       :handleHeroRematch="handleHeroRematch"
-      :loading="loading"
+      :loading="loading.value"
     />
     <Footer :isTanding="true" />
   </div>
